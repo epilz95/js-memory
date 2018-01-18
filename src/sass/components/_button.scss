@@ -1,0 +1,36 @@
+.button {
+    position: relative;
+
+    box-sizing: border-box;
+    margin: 0;
+
+    border: 3px solid $color-ebony-clay;
+    padding: 10px 20px;
+
+    background: transparent;
+    color: $color-ebony-clay;
+
+    font-size: 30px;
+    font-family: "Pacifico", sans-serif;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s, transform 0.3s;
+
+    + .button {
+        margin-left: 20px;
+    }
+
+    &:hover {
+        background-color: $color-mojo;
+        cursor: pointer;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.button-restart,
+.button-close {
+    width: calc(50% - 12px);
+}

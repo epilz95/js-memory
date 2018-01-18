@@ -1,0 +1,58 @@
+.overlay {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(112, 128, 144, 0.8);
+
+    &__dialog {
+        position: relative;
+
+        box-sizing: border-box;
+        margin: 265px auto 0;
+        padding: 70px 40px;
+        width: 500px;
+
+        background-color: $color-soft-amber;
+        box-shadow: 3px 5px 20px 15px rgba(45, 48, 71, 0.5);
+        border-radius: 5px;
+
+        &::before {
+            content: "";
+
+            position: absolute;
+            top: -50px;
+            left: calc(250px - 50px);
+
+            width: 100px;
+            height: 100px;
+
+            background-color: $color-ebony-clay;
+            border-radius: 50%;
+        }
+
+        &::after {
+            content: "";
+
+            position: absolute;
+            top: -20px;
+            left: calc(250px - 30px);
+
+            @extend .svg-success;
+            @extend .svg-success-dims;
+        }
+    }
+
+    p {
+        margin-top: 0;
+
+        color: $color-ebony-clay;
+        font-size: 30px;
+        font-family: "Pacifico", sans-serif;
+    }
+}
