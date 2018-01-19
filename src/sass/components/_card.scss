@@ -20,6 +20,10 @@
     border-radius: 15px;
     perspective: 1000px;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     &--front,
     &--back {
         position: absolute;
@@ -31,22 +35,28 @@
         backface-visibility: hidden;
         border-radius: 15px;
         transform-style: preserve-3d;
-        transition: all 0.5s;
+        transition: transform 0.6s, box-shadow 0.3s;
     }
 
     &--back {
         z-index: 2;
 
         background:
-            linear-gradient(135deg, #708090 22px, $color-soft-amber 22px, $color-soft-amber 24px, transparent 24px, transparent 67px, $color-soft-amber 67px, $color-soft-amber 69px, transparent 69px),
-            linear-gradient(225deg, #708090 22px, $color-soft-amber 22px, $color-soft-amber 24px, transparent 24px, transparent 67px, $color-soft-amber 67px, $color-soft-amber 69px, transparent 69px) 0 64px;
+            linear-gradient(135deg, $color-slate-gray 22px, $color-soft-amber 22px, $color-soft-amber 24px, transparent 24px, transparent 67px, $color-soft-amber 67px, $color-soft-amber 69px, transparent 69px),
+            linear-gradient(225deg, $color-slate-gray 22px, $color-soft-amber 22px, $color-soft-amber 24px, transparent 24px, transparent 67px, $color-soft-amber 67px, $color-soft-amber 69px, transparent 69px) 0 64px;
         background-size: 64px 128px;
-        background-color: #708090;
+        background-color: $color-slate-gray;
 
         box-shadow: inset 0 0.1em 5em rgba(0, 0, 0, 0.3);
+
+        &:hover {
+            box-shadow: inset 0 0.1em 5em rgba(220, 220, 220, 0.5);
+        }
     }
 
     &--front {
+        position: relative;
+
         transform: rotateY(-180deg);
 
         &.motiv1 {
@@ -110,7 +120,8 @@
         }
     }
 
-    &:hover {
+    &.flipped,
+    &.matched {
         .card--front {
             transform: rotateY(0);
         }
@@ -118,5 +129,42 @@
         .card--back {
             transform: rotateY(-180deg);
         }
+    }
+
+    &.matched {
+        .card--front::before {
+            content: "";
+
+            display: block;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+            background-color: $color-asparagus;
+            opacity: 0;
+
+            animation: 0.5s match ease-in-out;
+            animation-delay: 0.3s;
+            animation-iteration-count: 1;
+
+            border-radius: inherit;
+        }
+    }
+}
+
+@keyframes match {
+    0% {
+        opacity: 0.3;
+    }
+
+    20% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0;
     }
 }
