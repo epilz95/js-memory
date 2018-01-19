@@ -1,0 +1,122 @@
+.grid-container {
+    display: grid;
+
+    margin: 0 auto;
+    padding: 100px 0 0;
+    width: calc(6 * 150px + 5 * 30px);
+
+    grid-gap: 30px;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.card {
+    display: block;
+
+    position: relative;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 15px;
+    perspective: 1000px;
+
+    &--front,
+    &--back {
+        position: absolute;
+        top: 0;
+
+        width: 100%;
+        height: 100%;
+
+        backface-visibility: hidden;
+        border-radius: 15px;
+        transform-style: preserve-3d;
+        transition: all 0.5s;
+    }
+
+    &--back {
+        z-index: 2;
+
+        background:
+            linear-gradient(135deg, #708090 22px, $color-soft-amber 22px, $color-soft-amber 24px, transparent 24px, transparent 67px, $color-soft-amber 67px, $color-soft-amber 69px, transparent 69px),
+            linear-gradient(225deg, #708090 22px, $color-soft-amber 22px, $color-soft-amber 24px, transparent 24px, transparent 67px, $color-soft-amber 67px, $color-soft-amber 69px, transparent 69px) 0 64px;
+        background-size: 64px 128px;
+        background-color: #708090;
+
+        box-shadow: inset 0 0.1em 5em rgba(0, 0, 0, 0.3);
+    }
+
+    &--front {
+        transform: rotateY(-180deg);
+
+        &.motiv1 {
+            @extend .svg-motiv1;
+            @extend .svg-motiv1-dims;
+        }
+
+        &.motiv2 {
+            @extend .svg-motiv2;
+            @extend .svg-motiv2-dims;
+        }
+
+        &.motiv3 {
+            @extend .svg-motiv3;
+            @extend .svg-motiv3-dims;
+        }
+
+        &.motiv4 {
+            @extend .svg-motiv4;
+            @extend .svg-motiv4-dims;
+        }
+
+        &.motiv5 {
+            @extend .svg-motiv5;
+            @extend .svg-motiv5-dims;
+        }
+
+        &.motiv6 {
+            @extend .svg-motiv6;
+            @extend .svg-motiv6-dims;
+        }
+
+        &.motiv7 {
+            @extend .svg-motiv7;
+            @extend .svg-motiv7-dims;
+        }
+
+        &.motiv8 {
+            @extend .svg-motiv8;
+            @extend .svg-motiv8-dims;
+        }
+
+        &.motiv9 {
+            @extend .svg-motiv9;
+            @extend .svg-motiv9-dims;
+        }
+
+        &.motiv10 {
+            @extend .svg-motiv10;
+            @extend .svg-motiv10-dims;
+        }
+
+        &.motiv11 {
+            @extend .svg-motiv11;
+            @extend .svg-motiv11-dims;
+        }
+
+        &.motiv12 {
+            @extend .svg-motiv12;
+            @extend .svg-motiv12-dims;
+        }
+    }
+
+    &:hover {
+        .card--front {
+            transform: rotateY(0);
+        }
+
+        .card--back {
+            transform: rotateY(-180deg);
+        }
+    }
+}
