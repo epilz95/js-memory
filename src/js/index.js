@@ -73,7 +73,7 @@ const flipCard = (card: ?HTMLElement) => {
   card.classList.add('flipped')
 }
 
-const compareCards = () => {
+const compareCards = (): void => {
   const flippedCards = document.querySelectorAll('.card.flipped')
   const cardMotives = Array.from(document.querySelectorAll('.card.flipped .card--front'))
 
@@ -100,19 +100,15 @@ const compareCards = () => {
   }
 }
 
-const checkForWin = (cardNodes: NodeList<any>) => {
-  const matchedAll = store.matchCounter === MOTIFS.length / 2
+const displayOverlay = (): void => {
+  const overlayNode = document.querySelector('.overlay')
+  if (overlayNode) overlayNode.style.display = 'block'
 
-  if (matchedAll) {
-    const overlayNode = document.querySelector('.overlay')
-    if (overlayNode) overlayNode.style.display = 'block'
-
-    const overlayTextNode = document.querySelector('.overlay p')
-    if (overlayTextNode) overlayTextNode.innerHTML = `Congrats, you guessed all pairs within ${store.clicksCount} clicks!`
-  }
+  const overlayTextNode = document.querySelector('.overlay p')
+  if (overlayTextNode) overlayTextNode.innerHTML = `Congrats, you guessed all pairs within ${store.clicksCount} clicks!`
 }
 
-const handleRestart = () => {
+const handleRestart = (): void => {
   const cardFrontNodes = document.querySelectorAll('.card--front')
 
   cardFrontNodes.forEach(node => {
@@ -158,14 +154,19 @@ const addListeners = (): void => {
     if (cardsFlipped.length === 2) compareCards()
   }))
 
-  cardNodes.forEach(card => card.addEventListener('transitionend', () => {
+  cardNodes.forEach(card => card.addEventListener('transitionend', (e: Event) => {
+    const matchedAll = store.matchCounter === MOTIFS.length / 2
+
     const cardsFlipped = document.querySelectorAll('.card.flipped')
 
-    checkForWin(cardNodes)
+    // $FlowFixMe
+    if (e.propertyName.includes('transform')) {
+      if (matchedAll) displayOverlay()
 
-    if (cardsFlipped.length < 2) return
+      if (cardsFlipped.length < 2) return
 
-    turnCards(cardNodes)
+      turnCards(cardNodes)
+    }
   }))
 
   const buttonRestart = document.querySelector('.button-restart')
